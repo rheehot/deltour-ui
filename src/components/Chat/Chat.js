@@ -15,8 +15,31 @@ const Chat = ({ location }) => {
   const [response, setResponse] = useState('');
   const ENDPOINT = 'localhost:8080';
 
+
+  // useEffect(() => {
+  //   // cookie값을 받아서 넣기
+  //   const userName = queryString.parse(location.search);
+
+  //   setRoom(userName);
+
+  //   // cookie 값 변화가 있을 때마다
+  // }, [ENDPOINT, location.search]);
+
+  // messages에 변화가 있을 때
+  useEffect(() => {
+    setMessages([...messages, message ]);
+  }, [messages]);
+
   const sendMessage = (event) => {
     event.preventDefault();
+
+    axiosFunc(message);
+    
+    console.log(message);
+    console.log(response);    
+  }
+
+  const axiosFunc = (message) => {
 
     if (message) {
       axios.get(`${ENDPOINT}/dialogflow/detectIntent`, {
@@ -25,20 +48,20 @@ const Chat = ({ location }) => {
         }
       })
       .then(function (response) {
+        let fulfillmentText = response.fulfillmentText;
+        setResponse(response);
         console.log(response);  // 응답
       })
       .catch(function (error) {
       });    
     }
-    console.log(message);
-    console.log(response);    
   }
 
   return (
     <div className="outerContainer">
       <div className="container">
         <InfoBar userName={userName} />
-        <Messages messages={messages} />
+        <Messages messages={messages} userName={setUserName} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage}/>
       </div>
     </div>
