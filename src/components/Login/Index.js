@@ -2,10 +2,8 @@ import React from "react";
 import "./style.scss";
 import "./index.scss";
 
-import { Login } from "./Login.js";
-import { Register } from "./Register.js";
-
-
+import Login from "./Login.js";
+import Register from "./Register.js";
 class Index extends React.Component {
   constructor(props) {
     super(props);
