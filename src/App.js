@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter Route } from 'react-router-dom';
 
 import Index from './components/Login/Index.js';
 import Chat from './components/Chat/Chat.js';
 
 const App = () => (
-  <Router>
-    <Route path="/" component={Index} />
-    <Route path="/chat" component={Chat} />
-  </Router>
+  <HashRouter>
+    <Route path="/" exact={true} component={Index} />
+    <Route path="/chat" exact={true} component={Chat} />
+  </HashRouter>
 );
 
 export default App;
